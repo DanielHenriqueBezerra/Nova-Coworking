@@ -1,0 +1,37 @@
+/* =========================================
+   AGENDA
+========================================= */
+
+.agenda {
+  width: 100%;
+  margin-top: 32px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.agenda-header,
+.agenda-body {
+  display: grid;
+  grid-template-columns: 100px repeat(6, minmax(180px, 1fr));
+}
+
+.agenda-header {
+  background: var(--bg-suave);
+  font-weight: bold;
+}
+
+.hora-slot {
+  height: 60px;
+  padding: 6px;
+  border-bottom: 1px solid var(--borda-suave);
+  font-size: 12px;
+}
+
+.reserva-bloco {
+  background: var(--azul-supernova);
+  color: white;
+  padding: 6px;
+  border-radius: 8px;
+  font-size: 12px;
+}

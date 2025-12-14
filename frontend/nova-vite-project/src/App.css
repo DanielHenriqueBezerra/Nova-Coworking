@@ -1,0 +1,334 @@
+/* =========================================
+   🌌 SUPERNOVA THEME — BASE
+========================================= */
+
+:root {
+  --azul-supernova: #2563eb;
+  --azul-profundo: #1e3a8a;
+  --vermelho-supernova: #dc2626;
+  --verde-supernova: #16a34a;
+
+  --bg-principal: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-suave: #f1f5f9;
+
+  --texto-principal: #1e293b;
+  --texto-suave: #475569;
+  --borda-suave: #e5e7eb;
+}
+
+/* =========================================
+   RESET GLOBAL
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-principal);
+  color: var(--texto-principal);
+}
+
+/* =========================================
+   ESTRUTURA GLOBAL
+========================================= */
+
+#root,
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Navbar é FULL WIDTH */
+.Navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  width: 100%;
+  height: 64px;
+  padding: 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: linear-gradient(
+    90deg,
+    var(--azul-profundo),
+    var(--azul-supernova)
+  );
+
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.Navbar h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.Navbar nav {
+  display: flex;
+  gap: 18px;
+}
+
+.Navbar nav a {
+  color: #e5e7eb;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.Navbar nav a:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* =========================================
+   CONTEÚDO CENTRAL (CHAVE DA CORREÇÃO)
+========================================= */
+
+.main-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+/* ESTE CONTAINER ALINHA TUDO */
+.page-container {
+  width: 100%;
+  max-width: 1400px;
+}
+
+/* =========================================
+   TÍTULOS
+========================================= */
+
+h1 {
+  margin-top: 0;
+  font-size: 36px;
+}
+
+/* =========================================
+   🧩 CARDS / FORM
+========================================= */
+
+.card {
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+form.card {
+  max-width: 520px;
+}
+
+/* =========================================
+   FORMULÁRIOS
+========================================= */
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--borda-suave);
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--azul-supernova);
+}
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(
+    135deg,
+    var(--azul-supernova),
+    var(--azul-profundo)
+  );
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.danger {
+  background: linear-gradient(
+    135deg,
+    var(--vermelho-supernova),
+    #991b1b
+  );
+}
+
+/* =========================================
+   TABELAS
+========================================= */
+
+.table-wrapper {
+  width: 100%;
+  margin-top: 24px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th {
+  background: var(--bg-suave);
+  padding: 12px;
+  text-align: left;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--borda-suave);
+}
+
+/* =========================================
+   🗓️ AGENDA (FINALMENTE CORRETA)
+========================================= */
+
+.agenda {
+  width: 100%;
+  margin-top: 32px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.agenda-header,
+.agenda-body {
+  display: grid;
+  grid-template-columns: 100px repeat(6, minmax(180px, 1fr));
+}
+
+.agenda-header {
+  background: var(--bg-suave);
+  font-weight: bold;
+}
+
+.hora-slot {
+  height: 60px;
+  padding: 6px;
+  border-bottom: 1px solid var(--borda-suave);
+  font-size: 12px;
+}
+
+.reserva-bloco {
+  background: var(--azul-supernova);
+  color: white;
+  padding: 6px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 768px) {
+  .Navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .Navbar nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  form.card {
+    max-width: 100%;
+  }
+
+  .agenda-header,
+  .agenda-body {
+    grid-template-columns: 80px repeat(6, minmax(160px, 1fr));
+  }
+}
+
+/* ===============================
+   DASHBOARD
+=============================== */
+
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.dashboard-text {
+  max-width: 800px;
+  color: var(--texto-suave);
+}
+
+/* ALERTAS PADRÃO */
+
+.alert {
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.alert.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.alert.info {
+  background: #e0f2fe;
+  color: #075985;
+}
+/* ===============================
+   USUÁRIOS — LAYOUT VERTICAL
+=============================== */
+
+.usuarios-page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.usuarios-section {
+  width: 100%;
+}
+
+.usuarios-form {
+  max-width: 420px;
+}
+
