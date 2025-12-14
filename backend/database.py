@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 # URL de conexão com o banco do Supabase (PostgreSQL)
 DATABASE_URL = (
-   "postgresql://postgres:Asrrael88495474@db.sgeleowvmxankfsfxhkl.supabase.co:5432/postgres"
+    "postgresql://postgres:Asrrael88495474@db.sgeleowvmxankfsfxhkl.supabase.co:5432/postgres"
 )
 
 # Cria o engine (conexão com o banco)
