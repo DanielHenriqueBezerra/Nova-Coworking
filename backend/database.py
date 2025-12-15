@@ -1,20 +1,29 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from dotenv import load_dotenv
 
-# URL de conexão com o banco do Supabase (PostgreSQL)
-DATABASE_URL = (
-    "postgresql://postgres:Asrrael88495474@db.sgeleowvmxankfsfxhkl.supabase.co:5432/postgres"
+
+load_dotenv()
+
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL não definida nas variáveis de ambiente")
+
+
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    pool_recycle=300,
 )
 
-# Cria o engine (conexão com o banco)
-engine = create_engine(DATABASE_URL)
-
-# Cria a sessão de acesso ao banco
 SessaoBanco = sessionmaker(
     autocommit=False,
     autoflush=False,
     bind=engine
 )
 
-# Base para os modelos
+
 Base = declarative_base()
