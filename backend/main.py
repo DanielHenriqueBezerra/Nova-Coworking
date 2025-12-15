@@ -13,6 +13,8 @@ app.add_middleware(
     allow_origins=[
         "https://nova-coworking.vercel.app",
         "https://nova-coworking.onrender.com",
+        "http://localhost:5173",          # desenvolvimento local
+        "https://nova-coworking.vercel.app" 
     ],
     allow_credentials=True,
     allow_methods=["*"],
