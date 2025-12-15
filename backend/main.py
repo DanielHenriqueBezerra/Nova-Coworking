@@ -12,6 +12,7 @@ app.add_middleware(
     allow_origins=[
         "https://nova-coworking.vercel.app",
         "http://localhost:5173",
+        "httop://nova-coworking-mvki6k79c-daniel-henriques-projects-2d0b8166.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
