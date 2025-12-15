@@ -9,10 +9,8 @@ router = APIRouter(prefix="/usuarios", tags=["Usuários"])
 
 @router.get("/")
 def listar_usuarios(db: Session = Depends(get_db)):
-    try:
-        return db.query(Usuario).all()
-    except Exception as e:
-        return {"erro": str(e)}
+    return {"ok": True}
+
 
 
 @router.post("/")
