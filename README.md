@@ -1,301 +1,264 @@
-📘 Nova Coworking
-Sistema de Gestão de Salas e Reservas
+# 📘 Nova Coworking  
+**Sistema de Gestão de Salas e Reservas**
 
-📦 Versão Estável v1.0
+📦 **Versão Estável:** v1.0
 
-📑 Sumário
+---
 
-📌 Visão Geral
+## 📑 Sumário
 
-🧱 Arquitetura do Projeto
+- 📌 Visão Geral  
+- 🧱 Arquitetura do Projeto  
+- 🔧 Tecnologias Utilizadas  
+- 🎯 Objetivo do Sistema  
+- 🔐 Regras de Negócio  
+- 🗄️ Backend  
+  - 🧩 Entidades do Sistema  
+  - ⏰ Regras de Reserva  
+  - 🔌 Endpoints da API  
+  - 📑 Swagger  
+  - 🌐 CORS  
+  - ▶️ Como Rodar o Backend Localmente  
+- 🎨 Frontend  
+  - ▶️ Como Rodar o Frontend Localmente  
+- 🌍 Ambientes (Local x Produção)  
+- ⚙️ Deploy em Produção  
+- ⚠️ Limitações Atuais  
+- 🚀 Evoluções Planejadas  
 
-🔧 Tecnologias Utilizadas
+---
 
-🎯 Objetivo do Sistema
+## 📌 Visão Geral
 
-🔐 Regras de Negócio
+O **Nova Coworking** é um sistema web para **gestão de salas, usuários e reservas**, desenvolvido para:
 
-🗄️ Backend
+- Coworkings  
+- Escolas  
+- Empresas  
+- Ambientes com espaços compartilhados  
 
-🧩 Entidades do Sistema
+### Foco do Projeto
 
-⏰ Regras de Reserva
+- Arquitetura **full stack real**
+- Separação clara entre **frontend** e **backend**
+- Regras de negócio **centralizadas no backend**
+- Organização e legibilidade de código
+- Escalabilidade futura
 
-🔌 Endpoints da API
+---
 
-📑 Swagger
+## 🧱 Arquitetura do Projeto
 
-🌐 CORS
-
-▶️ Como Rodar o Backend Localmente
-
-🎨 Frontend
-
-▶️ Como Rodar o Frontend Localmente
-
-🌍 Ambientes (Local x Produção)
-
-⚙️ Deploy em Produção
-
-⚠️ Limitações Atuais
-
-🚀 Evoluções Planejadas
-
-📌 Visão Geral
-
-O Nova Coworking é um sistema web para gestão de salas, usuários e reservas, desenvolvido para:
-
-Coworkings
-
-Escolas
-
-Empresas
-
-Ambientes com espaços compartilhados
-
-O projeto tem foco em:
-
-Arquitetura full stack real
-
-Separação clara entre frontend e backend
-
-Regras de negócio centralizadas no backend
-
-Organização e legibilidade de código
-
-Escalabilidade futura
-
-🧱 Arquitetura do Projeto
-
-O sistema segue o modelo Frontend desacoplado + API REST.
+O sistema segue o modelo **Frontend desacoplado + API REST**.
 
 Frontend (React + Vite)
-        │
-        │ HTTP (Axios / JSON)
-        ▼
+│
+│ HTTP (Axios / JSON)
+▼
 Backend (FastAPI)
-        │
-        │ ORM (SQLAlchemy)
-        ▼
+│
+│ ORM (SQLAlchemy)
+▼
 Banco de Dados (PostgreSQL - Supabase)
 
-Estrutura Geral do Repositório
+shell
+Copiar código
+
+### Estrutura Geral do Repositório
+
 Nova-Coworking/
 ├─ backend/
-│  ├─ main.py
-│  ├─ database.py
-│  ├─ models/
-│  ├─ schemas/
-│  └─ router/
+│ ├─ main.py
+│ ├─ database.py
+│ ├─ models/
+│ ├─ schemas/
+│ └─ router/
 ├─ frontend/
-│  └─ nova-vite-project/
+│ └─ nova-vite-project/
 └─ README.md
 
-🔧 Tecnologias Utilizadas
-Backend
+yaml
+Copiar código
 
-Python 3.11.8
+---
 
-FastAPI
+## 🔧 Tecnologias Utilizadas
 
-SQLAlchemy
+### Backend
+- Python 3.11.8  
+- FastAPI  
+- SQLAlchemy  
+- Pydantic  
+- PostgreSQL (Supabase)  
+- Uvicorn  
+- CORS Middleware  
 
-Pydantic
+### Frontend
+- React  
+- Vite  
+- Axios  
+- React Router DOM  
+- CSS puro  
 
-PostgreSQL (Supabase)
+---
 
-Uvicorn
+## 🎯 Objetivo do Sistema
 
-CORS Middleware
+- Cadastrar usuários administrativos  
+- Cadastrar salas com capacidade e recursos  
+- Criar, listar e excluir reservas  
+- Evitar conflitos de horário  
+- Exibir agenda visual diária  
+- Dashboard com visão geral  
 
-Frontend
+📌 O sistema **inicia no Dashboard**  
+📌 **Não existe página Home**
 
-React
+---
 
-Vite
+## 🔐 Regras de Negócio (Decisão Arquitetural)
 
-Axios
+- Toda regra de negócio fica no **backend**
+- O frontend **não valida conflitos**
+- O frontend apenas envia dados
+- O backend decide:
+  - Se a reserva é válida
+  - Se existe conflito
+  - Se está dentro do horário permitido
 
-React Router DOM
+---
 
-CSS puro
+## 🗄️ Backend
 
-🎯 Objetivo do Sistema
+### 📂 Estrutura
 
-Cadastrar usuários administrativos
-
-Cadastrar salas com capacidade e recursos
-
-Criar, listar e excluir reservas
-
-Evitar conflitos de horário
-
-Exibir agenda visual diária
-
-Dashboard com visão geral
-
-📌 O sistema inicia no Dashboard
-📌 Não existe página Home
-
-🔐 Regras de Negócio (Decisão Arquitetural)
-
-Toda regra de negócio fica no backend
-
-O frontend não valida conflitos
-
-O frontend apenas envia dados
-
-O backend decide:
-
-Se a reserva é válida
-
-Se existe conflito
-
-Se está dentro do horário permitido
-
-🗄️ Backend
-📂 Estrutura
 backend/
 ├─ main.py
 ├─ database.py
 ├─ models/
-│  ├─ usuarios.py
-│  ├─ salas.py
-│  └─ reservas.py
+│ ├─ usuarios.py
+│ ├─ salas.py
+│ └─ reservas.py
 ├─ schemas/
-│  ├─ usuario.py
-│  ├─ sala.py
-│  └─ reserva.py
+│ ├─ usuario.py
+│ ├─ sala.py
+│ └─ reserva.py
 └─ router/
-   ├─ usuarios.py
-   ├─ salas.py
-   └─ reservas.py
+├─ usuarios.py
+├─ salas.py
+└─ reservas.py
 
-🧩 Entidades do Sistema
-👤 Usuário
+yaml
+Copiar código
 
-id
+---
 
-nome
+## 🧩 Entidades do Sistema
 
-email
+### 👤 Usuário
+- id  
+- nome  
+- email  
+- senha (obrigatória)  
 
-senha (obrigatória)
+📌 A senha **não é usada atualmente**, mas o campo existe por decisão arquitetural visando:
+- Autenticação futura  
+- JWT  
+- Controle de permissões  
 
-📌 A senha não é usada atualmente, mas o campo existe por decisão arquitetural visando:
+### 🏢 Sala
+- id  
+- nome  
+- capacidade  
+- recursos  
+- fotourl (opcional)  
 
-Autenticação futura
+### 📅 Reserva
+- id  
+- usuario_id  
+- sala_id  
+- data_reserva  
+- duração (horas)  
+- status  
+- observacao  
 
-JWT
+---
 
-Controle de permissões
+## ⏰ Regras de Reserva (Backend)
 
-🏢 Sala
+- Horário permitido: **08:00 às 22:00**
+- Duração mínima: **2 horas**
+- Não permite sobreposição de horários
+- Conflitos são verificados exclusivamente no backend
 
-id
+---
 
-nome
+## 🔌 Endpoints da API
 
-capacidade
+### Usuários
+- `GET /usuarios`
+- `POST /usuarios`
+- `PUT /usuarios/{id}`
+- `DELETE /usuarios/{id}`
 
-recursos
+### Salas
+- `GET /salas`
+- `POST /salas`
 
-fotourl (opcional)
+### Reservas
+- `GET /reservas`
+- `POST /reservas`
+- `DELETE /reservas/{id}`
 
-📅 Reserva
+---
 
-id
-
-usuario_id
-
-sala_id
-
-data_reserva
-
-duração (horas)
-
-status
-
-observacao
-
-⏰ Regras de Reserva (Backend)
-
-Horário permitido: 08:00 às 22:00
-
-Duração mínima: 2 horas
-
-Não permite sobreposição de horários
-
-Conflitos são verificados no backend
-
-🔌 Endpoints da API
-Usuários
-
-GET /usuarios
-
-POST /usuarios
-
-PUT /usuarios/{id}
-
-DELETE /usuarios/{id}
-
-Salas
-
-GET /salas
-
-POST /salas
-
-Reservas
-
-GET /reservas
-
-POST /reservas
-
-DELETE /reservas/{id}
-
-📑 Swagger (Documentação da API)
+## 📑 Swagger (Documentação da API)
 
 Disponível automaticamente pelo FastAPI:
 
 /docs
 
+yaml
+Copiar código
 
 Permite:
+- Testar endpoints
+- Visualizar schemas
+- Simular requisições
 
-Testar endpoints
+---
 
-Ver schemas
+## 🌐 CORS
 
-Simular requisições
+### Local
+- `http://localhost:5173`
 
-🌐 CORS
-Local
+### Produção
+- `https://nova-coworking.vercel.app`
 
-http://localhost:5173
+---
 
-Produção
+## ▶️ Como Rodar o Backend Localmente
 
-https://nova-coworking.vercel.app
+### Pré-requisitos
+- Python 3.11.8
+- PostgreSQL ou Supabase
 
-▶️ Como Rodar o Backend Localmente
-Pré-requisitos
+### Passos
 
-Python 3.11.8
-
-PostgreSQL ou Supabase
-
+```bash
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --reload
-
-
-API disponível em:
-
+API disponível em
+cpp
+Copiar código
 http://127.0.0.1:8000
-
 🎨 Frontend
 Estrutura
+css
+Copiar código
 src/
 ├─ components/
 ├─ pages/
@@ -303,21 +266,19 @@ src/
 ├─ App.jsx
 ├─ main.jsx
 └─ App.css
-
 ▶️ Como Rodar o Frontend Localmente (Vite)
+bash
+Copiar código
 npm install
 npm run dev
-
-
-Arquivo .env:
-
+Arquivo .env
+ini
+Copiar código
 VITE_API_URL=http://127.0.0.1:8000
-
-
-Acesso:
-
+Acesso
+arduino
+Copiar código
 http://localhost:5173
-
 🌍 Ambientes (Local x Produção)
 Camada	Local	Produção
 Frontend	Vite	Vercel
@@ -325,32 +286,32 @@ Backend	FastAPI	Render
 Banco	Supabase	Supabase
 Python	3.11.8	3.11.8
 Variáveis	.env	Dashboard
+
 ⚙️ Deploy em Produção
 Backend (Render)
-
 O arquivo runtime.txt não funcionou corretamente
 
-A versão do Python precisou ser forçada via variável:
+A versão do Python foi forçada via variável de ambiente:
 
+ini
+Copiar código
 PYTHON_VERSION=3.11.8
+Start Command:
 
-
-Start command:
-
+bash
+Copiar código
 uvicorn main:app --host 0.0.0.0 --port $PORT
-
 Frontend (Vercel)
-
 Build com Vite
 
 Uso de vercel.json para SPA:
 
+json
+Copiar código
 {
   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
-
 ⚠️ Limitações Atuais
-
 Sem autenticação
 
 Sem permissões
@@ -360,12 +321,11 @@ Sem testes automatizados
 Layout em evolução
 
 🚀 Evoluções Planejadas
-
 Autenticação JWT
 
 Login público
 
-Permissões
+Sistema de permissões
 
 Docker
 
