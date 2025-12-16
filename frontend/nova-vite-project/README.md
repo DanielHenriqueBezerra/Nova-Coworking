@@ -1,370 +1,376 @@
-# 📘 Nova Coworking
-## Sistema de Gestão de Salas e Reservas
+📘 Nova Coworking
+Sistema de Gestão de Salas e Reservas
 
----
+📦 Versão Estável v1.0
 
-## 📌 Visão Geral
+📑 Sumário
 
-O **Nova Coworking** é um sistema web para gestão de **salas, usuários e reservas**, desenvolvido para:
+📌 Visão Geral
 
-- Coworkings  
-- Escolas  
-- Empresas  
-- Ambientes que utilizam espaços compartilhados  
+🧱 Arquitetura do Projeto
 
-O sistema foi projetado com foco em:
+🔧 Tecnologias Utilizadas
 
-- Separação clara entre frontend e backend  
-- Regras de negócio centralizadas no backend  
-- Estrutura escalável para futuras funcionalidades  
-- Organização e clareza de código  
-- Aprendizado prático de arquitetura full stack  
+🎯 Objetivo do Sistema
 
----
+🔐 Regras de Negócio
 
-## 🧱 Arquitetura do Projeto
+🗄️ Backend
 
-O projeto segue o modelo **Frontend + API REST**, com comunicação via **HTTP (JSON)**.
+🧩 Entidades do Sistema
+
+⏰ Regras de Reserva
+
+🔌 Endpoints da API
+
+📑 Swagger
+
+🌐 CORS
+
+▶️ Como Rodar o Backend Localmente
+
+🎨 Frontend
+
+▶️ Como Rodar o Frontend Localmente
+
+🌍 Ambientes (Local x Produção)
+
+⚙️ Deploy em Produção
+
+⚠️ Limitações Atuais
+
+🚀 Evoluções Planejadas
+
+📌 Visão Geral
+
+O Nova Coworking é um sistema web para gestão de salas, usuários e reservas, desenvolvido para:
+
+Coworkings
+
+Escolas
+
+Empresas
+
+Ambientes com espaços compartilhados
+
+O projeto tem foco em:
+
+Arquitetura full stack real
+
+Separação clara entre frontend e backend
+
+Regras de negócio centralizadas no backend
+
+Organização e legibilidade de código
+
+Escalabilidade futura
+
+🧱 Arquitetura do Projeto
+
+O sistema segue o modelo Frontend desacoplado + API REST.
 
 Frontend (React + Vite)
-│
-│ Requisições HTTP (Axios)
-▼
+        │
+        │ HTTP (Axios / JSON)
+        ▼
 Backend (FastAPI)
-│
-│ ORM (SQLAlchemy)
-▼
+        │
+        │ ORM (SQLAlchemy)
+        ▼
 Banco de Dados (PostgreSQL - Supabase)
 
-shell
-Copiar código
-
-### Estrutura Geral do Repositório
-
+Estrutura Geral do Repositório
 Nova-Coworking/
 ├─ backend/
-│ ├─ main.py
-│ ├─ database.py
-│ ├─ models/
-│ ├─ schemas/
-│ └─ router/
+│  ├─ main.py
+│  ├─ database.py
+│  ├─ models/
+│  ├─ schemas/
+│  └─ router/
 ├─ frontend/
-│ └─ nova-vite-project/
+│  └─ nova-vite-project/
 └─ README.md
 
-yaml
-Copiar código
+🔧 Tecnologias Utilizadas
+Backend
 
----
+Python 3.11.8
 
-## 🔧 Tecnologias Utilizadas
+FastAPI
 
-### Backend
-- Python 3.11+
-- FastAPI
-- SQLAlchemy (ORM)
-- Pydantic
-- PostgreSQL (Supabase)
-- Uvicorn
-- CORS Middleware
+SQLAlchemy
 
-### Frontend
-- React
-- Vite
-- Axios
-- React Router DOM
-- CSS puro (`App.css`)
+Pydantic
 
----
+PostgreSQL (Supabase)
 
-## 🎯 Objetivo do Sistema
+Uvicorn
 
-- Cadastrar usuários administrativos  
-- Cadastrar salas com capacidade e recursos  
-- Criar, listar e excluir reservas  
-- Evitar conflitos de horário entre reservas  
-- Exibir agenda visual por dia  
-- Fornecer visão geral no dashboard  
+CORS Middleware
 
----
+Frontend
 
-## 🔐 Regras de Negócio (Decisão Arquitetural)
+React
 
-- Toda regra de negócio fica no backend  
-- O frontend não valida conflitos  
-- O frontend apenas envia dados  
-- O backend decide:
-  - Se a reserva é válida  
-  - Se há conflito de horário  
-  - Se está dentro do horário permitido  
+Vite
 
-📌 O sistema inicia no **Dashboard**  
-📌 Não existe página **Home**
+Axios
 
----
+React Router DOM
 
-## 🗄️ Backend
+CSS puro
 
-### 📂 Estrutura de Pastas
+🎯 Objetivo do Sistema
 
+Cadastrar usuários administrativos
+
+Cadastrar salas com capacidade e recursos
+
+Criar, listar e excluir reservas
+
+Evitar conflitos de horário
+
+Exibir agenda visual diária
+
+Dashboard com visão geral
+
+📌 O sistema inicia no Dashboard
+📌 Não existe página Home
+
+🔐 Regras de Negócio (Decisão Arquitetural)
+
+Toda regra de negócio fica no backend
+
+O frontend não valida conflitos
+
+O frontend apenas envia dados
+
+O backend decide:
+
+Se a reserva é válida
+
+Se existe conflito
+
+Se está dentro do horário permitido
+
+🗄️ Backend
+📂 Estrutura
 backend/
-├─ main.py → Inicialização da aplicação
-├─ database.py → Conexão com banco
-├─ models/ → Modelos SQLAlchemy
-│ ├─ usuarios.py
-│ ├─ salas.py
-│ └─ reservas.py
-├─ schemas/ → Schemas Pydantic
-│ ├─ usuario.py
-│ ├─ sala.py
-│ └─ reserva.py
-└─ router/ → Rotas da API
-├─ usuarios.py
-├─ salas.py
-└─ reservas.py
+├─ main.py
+├─ database.py
+├─ models/
+│  ├─ usuarios.py
+│  ├─ salas.py
+│  └─ reservas.py
+├─ schemas/
+│  ├─ usuario.py
+│  ├─ sala.py
+│  └─ reserva.py
+└─ router/
+   ├─ usuarios.py
+   ├─ salas.py
+   └─ reservas.py
 
-yaml
-Copiar código
+🧩 Entidades do Sistema
+👤 Usuário
 
----
+id
 
-## 🧩 Entidades do Sistema
+nome
 
-### 👤 Usuário
-Campos:
-- id  
-- nome  
-- email  
-- senha (**NOT NULL**)  
+email
 
-#### ⚠️ Observação Importante sobre a Senha
-Atualmente **não existe autenticação/login** no sistema.
+senha (obrigatória)
 
-O campo `senha` é obrigatório por **decisão arquitetural**, visando escala futura para:
-- Login administrativo  
-- Login de usuários finais  
-- Separação de permissões (admin / usuário)  
-- Implementação de JWT e controle de sessão  
+📌 A senha não é usada atualmente, mas o campo existe por decisão arquitetural visando:
 
-📌 A senha **não é usada hoje**, mas o banco já está preparado para o futuro.
+Autenticação futura
 
----
+JWT
 
-### 🏢 Sala
-Campos:
-- id  
-- nome  
-- capacidade  
-- recursos  
-- fotourl (opcional)  
+Controle de permissões
 
----
+🏢 Sala
 
-### 📅 Reserva
-Campos:
-- id  
-- usuario_id (FK)  
-- sala_id (FK)  
-- data_reserva (datetime)  
-- duração (horas)  
-- status  
-- observacao  
+id
 
----
+nome
 
-## ⏰ Regras de Reserva (Backend)
+capacidade
 
-- Horário permitido: **08:00 até 22:00**
-- Duração mínima: **2 horas**
-- Duração variável (definida pelo usuário)
-- Não pode existir sobreposição de horários
+recursos
 
-A verificação de conflito compara:
-- Início da nova reserva  
-- Fim da nova reserva  
-- Reservas existentes da mesma sala  
+fotourl (opcional)
 
-📌 Toda essa lógica fica **exclusivamente no backend**.
+📅 Reserva
 
----
+id
 
-## 🔌 Endpoints da API
+usuario_id
 
-### Usuários
-- GET `/usuarios`
-- POST `/usuarios`
-- PUT `/usuarios/{id}`
-- DELETE `/usuarios/{id}`
+sala_id
 
-### Salas
-- GET `/salas`
-- POST `/salas`
-- PUT `/salas/{id}`
-- DELETE `/salas/{id}`
+data_reserva
 
-### Reservas
-- GET `/reservas`
-- POST `/reservas`
-- PUT `/reservas/{id}`
-- DELETE `/reservas/{id}`
-- GET `/reservas/sala/{sala_id}`
-- GET `/reservas/usuario/{usuario_id}`
+duração (horas)
 
----
+status
 
-## 📑 Swagger (Documentação da API)
+observacao
 
-O backend utiliza **Swagger UI**, gerado automaticamente pelo FastAPI.
+⏰ Regras de Reserva (Backend)
 
-📍 Acesso:
-http://127.0.0.1:8000/docs
+Horário permitido: 08:00 às 22:00
 
-yaml
-Copiar código
+Duração mínima: 2 horas
 
-No Swagger é possível:
-- Ver todos os endpoints
-- Testar requisições
-- Visualizar schemas
-- Simular POST, PUT e DELETE
+Não permite sobreposição de horários
 
----
+Conflitos são verificados no backend
 
-## 🌐 CORS
+🔌 Endpoints da API
+Usuários
 
-Permite acesso apenas de:
-- http://localhost:5173  
-- http://127.0.0.1:5173  
+GET /usuarios
 
----
+POST /usuarios
 
-## ▶️ Como Rodar o Backend
+PUT /usuarios/{id}
 
-```bash
+DELETE /usuarios/{id}
+
+Salas
+
+GET /salas
+
+POST /salas
+
+Reservas
+
+GET /reservas
+
+POST /reservas
+
+DELETE /reservas/{id}
+
+📑 Swagger (Documentação da API)
+
+Disponível automaticamente pelo FastAPI:
+
+/docs
+
+
+Permite:
+
+Testar endpoints
+
+Ver schemas
+
+Simular requisições
+
+🌐 CORS
+Local
+
+http://localhost:5173
+
+Produção
+
+https://nova-coworking.vercel.app
+
+▶️ Como Rodar o Backend Localmente
+Pré-requisitos
+
+Python 3.11.8
+
+PostgreSQL ou Supabase
+
+python -m venv venv
 venv\Scripts\activate
+pip install -r requirements.txt
 uvicorn main:app --reload
+
+
 API disponível em:
 
-cpp
-Copiar código
 http://127.0.0.1:8000
+
 🎨 Frontend
-📂 Estrutura de Pastas
-css
-Copiar código
+Estrutura
 src/
 ├─ components/
-│  ├─ Navbar.jsx
-│  ├─ Card.jsx
-│  └─ AgendaDia.jsx
 ├─ pages/
-│  ├─ Dashboard.jsx
-│  ├─ Usuarios.jsx
-│  ├─ Salas.jsx
-│  └─ Reservas.jsx
 ├─ services/
-│  └─ api.js
 ├─ App.jsx
-├─ App.css
-└─ main.jsx
-🧭 Navegação
-Rota	Página
-/	Dashboard
-/usuarios	Usuários
-/salas	Salas
-/reservas	Reservas
+├─ main.jsx
+└─ App.css
 
-📊 Dashboard
-Cards informativos
-
-Total de usuários
-
-Total de salas
-
-Total de reservas
-
-Visão geral do sistema
-
-👥 Usuários
-CRUD funcional
-
-Criação
-
-Listagem
-
-Exclusão
-
-Senha obrigatória (uso futuro)
-
-🏢 Salas
-Listagem em grid
-
-Limite visual de até 4 salas por linha
-
-Exibição de capacidade e recursos
-
-Botão para reservar
-
-📅 Reservas
-CRUD funcional
-
-Seleção de usuário e sala
-
-Escolha de data e duração
-
-Exibição de:
-
-horário inicial
-
-horário final (calculado pela duração)
-
-Agenda visual diária
-
-🌐 Comunicação com Backend
-Arquivo: src/services/api.js
-
-js
-Copiar código
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://127.0.0.1:8000"
-});
-
-export default api;
-▶️ Como Rodar o Frontend
-bash
-Copiar código
+▶️ Como Rodar o Frontend Localmente (Vite)
 npm install
 npm run dev
-Aplicação disponível em:
 
-arduino
-Copiar código
+
+Arquivo .env:
+
+VITE_API_URL=http://127.0.0.1:8000
+
+
+Acesso:
+
 http://localhost:5173
+
+🌍 Ambientes (Local x Produção)
+Camada	Local	Produção
+Frontend	Vite	Vercel
+Backend	FastAPI	Render
+Banco	Supabase	Supabase
+Python	3.11.8	3.11.8
+Variáveis	.env	Dashboard
+⚙️ Deploy em Produção
+Backend (Render)
+
+O arquivo runtime.txt não funcionou corretamente
+
+A versão do Python precisou ser forçada via variável:
+
+PYTHON_VERSION=3.11.8
+
+
+Start command:
+
+uvicorn main:app --host 0.0.0.0 --port $PORT
+
+Frontend (Vercel)
+
+Build com Vite
+
+Uso de vercel.json para SPA:
+
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}
+
 ⚠️ Limitações Atuais
+
 Sem autenticação
 
 Sem permissões
 
-Layout ainda em refinamento
-
 Sem testes automatizados
 
-Sem deploy em produção
+Layout em evolução
 
 🚀 Evoluções Planejadas
+
 Autenticação JWT
 
 Login público
 
-Separação Admin / Usuário
-
-Dashboard avançado
-
-Testes automatizados
+Permissões
 
 Docker
 
-Deploy em nuvem
+Testes automatizados
 
+Dashboard avançado
+
+📦 Nova Coworking — Versão Estável v1.0

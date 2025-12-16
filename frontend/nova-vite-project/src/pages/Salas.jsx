@@ -45,13 +45,13 @@ export default function Salas() {
         <div className="page-container">
           <h1>Salas</h1>
 
-          {/* LOADING */}
+         
           {loading && <p>Carregando salas...</p>}
 
-          {/* ERRO */}
+          
           {erro && <div className="alert error">{erro}</div>}
 
-          {/* LISTAGEM */}
+          
           {!loading && !erro && (
             <div className="salas-grid">
               {salas.map((sala, index) => (

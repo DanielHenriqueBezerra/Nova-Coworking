@@ -28,7 +28,7 @@ export default function AgendaDia({ salas, reservas }) {
   const duracaoHoras =
     parseInt(String(reserva.status).replace("h", ""), 10) || 2;
 
-  const PIXELS_POR_HORA = 60; // 🔑 precisa bater com .hora-slot
+  const PIXELS_POR_HORA = 60; 
 
   const minutosDesde8 =
     (horaInicio - 8) * 60 + minutosInicio;

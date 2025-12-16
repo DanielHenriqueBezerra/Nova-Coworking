@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <aside className="Navbar">
-      {/* LOGO + TÍTULO */}
+      
       <div className="navbar-header">
         <img
           src="/iconSupernova.png"

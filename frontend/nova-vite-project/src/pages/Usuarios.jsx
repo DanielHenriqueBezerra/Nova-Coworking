@@ -76,7 +76,7 @@ export default function Usuarios() {
         {erro && <div className="alert error">{erro}</div>}
         {loading && <p>Carregando usuários...</p>}
 
-        {/* FORMULÁRIO */}
+        
         <section className="usuarios-section">
           <form onSubmit={criarUsuario} className="card usuarios-form">
             <input
@@ -106,7 +106,7 @@ export default function Usuarios() {
           </form>
         </section>
 
-        {/* TABELA */}
+        
         <section className="usuarios-section">
           {!loading && usuarios.length === 0 && (
             <p>Nenhum usuário cadastrado.</p>

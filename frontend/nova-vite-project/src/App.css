@@ -1,7 +1,3 @@
-/* =========================================
-   🌌 SUPERNOVA THEME — BASE
-========================================= */
-
 :root {
   --azul-supernova: #2563eb;
   --azul-profundo: #1e3a8a;
@@ -16,10 +12,6 @@
   --texto-suave: #475569;
   --borda-suave: #e5e7eb;
 }
-
-/* =========================================
-   RESET GLOBAL
-========================================= */
 
 * {
   box-sizing: border-box;
@@ -39,17 +31,13 @@ body {
   color: var(--texto-principal);
 }
 
-/* =========================================
-   ESTRUTURA GLOBAL
-========================================= */
-
 #root,
 .app-container {
   width: 100%;
   min-height: 100vh;
 }
 
-/* Navbar é FULL WIDTH */
+
 .Navbar {
   position: sticky;
   top: 0;
@@ -95,10 +83,6 @@ body {
   background: rgba(255,255,255,0.15);
 }
 
-/* =========================================
-   CONTEÚDO CENTRAL (CHAVE DA CORREÇÃO)
-========================================= */
-
 .main-content {
   width: 100%;
   display: flex;
@@ -106,24 +90,16 @@ body {
   padding: 32px 16px;
 }
 
-/* ESTE CONTAINER ALINHA TUDO */
+
 .page-container {
   width: 100%;
   max-width: 1400px;
 }
 
-/* =========================================
-   TÍTULOS
-========================================= */
-
 h1 {
   margin-top: 0;
   font-size: 36px;
 }
-
-/* =========================================
-   🧩 CARDS / FORM
-========================================= */
 
 .card {
   background: var(--bg-card);
@@ -135,10 +111,6 @@ h1 {
 form.card {
   max-width: 520px;
 }
-
-/* =========================================
-   FORMULÁRIOS
-========================================= */
 
 input,
 select {
@@ -155,10 +127,6 @@ select:focus {
   outline: none;
   border-color: var(--azul-supernova);
 }
-
-/* =========================================
-   BOTÕES
-========================================= */
 
 button {
   padding: 10px 18px;
@@ -181,10 +149,6 @@ button.danger {
     #991b1b
   );
 }
-
-/* =========================================
-   TABELAS
-========================================= */
 
 .table-wrapper {
   width: 100%;
@@ -210,10 +174,6 @@ td {
   padding: 12px;
   border-bottom: 1px solid var(--borda-suave);
 }
-
-/* =========================================
-   🗓️ AGENDA (FINALMENTE CORRETA)
-========================================= */
 
 .agenda {
   width: 100%;
@@ -249,10 +209,6 @@ td {
   font-size: 12px;
 }
 
-/* =========================================
-   RESPONSIVO
-========================================= */
-
 @media (max-width: 768px) {
   .Navbar {
     flex-direction: column;
@@ -276,10 +232,6 @@ td {
   }
 }
 
-/* ===============================
-   DASHBOARD
-=============================== */
-
 .dashboard-page {
   display: flex;
   flex-direction: column;
@@ -297,7 +249,7 @@ td {
   color: var(--texto-suave);
 }
 
-/* ALERTAS PADRÃO */
+
 
 .alert {
   padding: 14px 18px;
@@ -314,9 +266,7 @@ td {
   background: #e0f2fe;
   color: #075985;
 }
-/* ===============================
-   USUÁRIOS — LAYOUT VERTICAL
-=============================== */
+
 
 .usuarios-page {
   display: flex;
@@ -331,10 +281,6 @@ td {
 .usuarios-form {
   max-width: 420px;
 }
-
-/* ===============================
-   NAVBAR — LOGO AO LADO DO TÍTULO
-=============================== */
 
 .navbar-header {
   display: flex;

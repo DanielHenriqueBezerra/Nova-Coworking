@@ -7,7 +7,7 @@ from router.reservas import router as reservas_router
 
 app = FastAPI(title="Nova Coworking API")
 
-# CORS – obrigatório antes dos routers
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[

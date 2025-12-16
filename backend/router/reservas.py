@@ -12,9 +12,7 @@ router = APIRouter(prefix="/reservas", tags=["Reservas"])
 
 
 def _parse_duracao_horas(status_str: str) -> int:
-    """
-    Espera algo como "2h", "4h".
-    """
+    
     try:
         horas = int(str(status_str).lower().replace("h", "").strip())
         if horas <= 0:
@@ -42,12 +40,10 @@ def criar_reserva(dados: ReservaCreate, db: Session = Depends(get_db)):
     inicio = dados.data_reserva
     fim = inicio + timedelta(hours=duracao_horas)
 
-    # Janela permitida (ajuste se quiser)
+    
     if inicio.time() < time(8, 0) or fim.time() > time(22, 0):
         raise HTTPException(status_code=400, detail="Horário inválido (permitido 08:00–22:00)")
 
-    # Conflito de horário: mesma sala e intervalos sobrepostos
-    # Condição de overlap: (inicio < existente_fim) AND (fim > existente_inicio)
     existentes = db.query(Reserva).filter(Reserva.sala_id == dados.sala_id).all()
     for r in existentes:
         r_dur = _parse_duracao_horas(r.status)
