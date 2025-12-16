@@ -19,22 +19,29 @@ export default function AgendaDia({ salas, reservas }) {
     );
   }
 
-  function calcularEstilo(reserva) {
-    const inicio = new Date(reserva.data_reserva);
-    const horaInicio = inicio.getHours();
-    const minutosInicio = inicio.getMinutes();
+ function calcularEstilo(reserva) {
+  const inicio = new Date(reserva.data_reserva);
 
-    const duracaoHoras =
-      parseInt(String(reserva.status).replace("h", ""), 10) || 2;
+  const horaInicio = inicio.getHours();
+  const minutosInicio = inicio.getMinutes();
 
-    const top = ((horaInicio - 8) * 60 + minutosInicio) * 1;
-    const height = duracaoHoras * 60; // 1h = 60px
+  const duracaoHoras =
+    parseInt(String(reserva.status).replace("h", ""), 10) || 2;
 
-    return {
-      top: `${top}px`,
-      height: `${height}px`
-    };
-  }
+  const PIXELS_POR_HORA = 60; // 🔑 precisa bater com .hora-slot
+
+  const minutosDesde8 =
+    (horaInicio - 8) * 60 + minutosInicio;
+
+  const top = minutosDesde8 * (PIXELS_POR_HORA / 60);
+  const height = duracaoHoras * PIXELS_POR_HORA;
+
+  return {
+    top: `${top}px`,
+    height: `${height}px`
+  };
+}
+
 
   return (
     <div className="agenda">
