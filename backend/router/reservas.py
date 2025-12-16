@@ -10,6 +10,10 @@ from schemas.reserva import ReservaCreate
 
 router = APIRouter(prefix="/reservas", tags=["Reservas"])
 
+@router.get("/")
+def listar_reservas(db: Session = Depends(get_db)):
+    return db.query(Reserva).order_by(Reserva.data_reserva).all()
+
 @router.post("/")
 def criar_reserva(dados: ReservaCreate, db: Session = Depends(get_db)):
     usuario = db.query(Usuario).filter(Usuario.id == dados.usuario_id).first()
@@ -20,9 +24,9 @@ def criar_reserva(dados: ReservaCreate, db: Session = Depends(get_db)):
     if not sala:
         raise HTTPException(status_code=400, detail="Sala não encontrada")
 
-    duracao_horas = int(dados.status.replace("h", ""))
+    horas = int(dados.status.replace("h", ""))
     inicio = dados.data_reserva
-    fim = inicio + timedelta(hours=duracao_horas)
+    fim = inicio + timedelta(hours=horas)
 
     if inicio.time() < time(8, 0) or fim.time() > time(22, 0):
         raise HTTPException(status_code=400, detail="Horário inválido")
@@ -31,7 +35,7 @@ def criar_reserva(dados: ReservaCreate, db: Session = Depends(get_db)):
         usuario_id=dados.usuario_id,
         sala_id=dados.sala_id,
         data_reserva=inicio,
-        status=f"{duracao_horas}h",
+        status=dados.status,
         observacao=dados.observacao
     )
 
@@ -39,7 +43,3 @@ def criar_reserva(dados: ReservaCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(nova)
     return nova
-
-@router.get("/")
-def listar_reservas(db: Session = Depends(get_db)):
-    return db.query(Reserva).order_by(Reserva.data_reserva).all()

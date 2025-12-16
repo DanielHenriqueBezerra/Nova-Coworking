@@ -9,9 +9,7 @@ router = APIRouter(prefix="/usuarios", tags=["Usuários"])
 
 @router.get("/")
 def listar_usuarios(db: Session = Depends(get_db)):
-    return {"ok": True}
-
-
+    return db.query(Usuario).order_by(Usuario.nome).all()
 
 @router.post("/")
 def criar_usuario(nome: str, email: str, senha: str, db: Session = Depends(get_db)):
@@ -26,9 +24,10 @@ def excluir_usuario(usuario_id: int, db: Session = Depends(get_db)):
     usuario = db.query(Usuario).filter(Usuario.id == usuario_id).first()
     if not usuario:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
+
     db.delete(usuario)
     db.commit()
-    return {"message": "Usuário excluído com sucesso"}
+    return {"message": "Usuário excluído"}
 
 @router.put("/{usuario_id}")
 def editar_usuario(usuario_id: int, dados: UsuarioUpdate, db: Session = Depends(get_db)):
