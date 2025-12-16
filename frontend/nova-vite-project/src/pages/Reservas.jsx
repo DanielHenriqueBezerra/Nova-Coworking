@@ -3,6 +3,10 @@ import api from "../services/api";
 import Navbar from "../components/Navbar";
 import AgendaDia from "../components/AgendaDia";
 
+function toArray(data) {
+  return Array.isArray(data) ? data : [];
+}
+
 export default function Reservas() {
   const [usuarios, setUsuarios] = useState([]);
   const [salas, setSalas] = useState([]);
@@ -15,89 +19,62 @@ export default function Reservas() {
 
   const [mensagem, setMensagem] = useState("");
   const [erro, setErro] = useState("");
-  const [loading, setLoading] = useState(true);
 
-  // ===============================
-  // CARREGAMENTO INICIAL
-  // ===============================
   useEffect(() => {
     async function carregar() {
-      setLoading(true);
-      setErro("");
-
       try {
         const [u, s, r] = await Promise.all([
           api.get("/usuarios/"),
           api.get("/salas/"),
-          api.get("/reservas/")
+          api.get("/reservas/"),
         ]);
 
-        setUsuarios(Array.isArray(u.data) ? u.data : []);
-        setSalas(Array.isArray(s.data) ? s.data : []);
-        setReservas(Array.isArray(r.data) ? r.data : []);
-      } catch {
-        setErro("Erro ao carregar dados");
-        setUsuarios([]);
-        setSalas([]);
-        setReservas([]);
-      } finally {
-        setLoading(false);
+        setUsuarios(toArray(u.data));
+        setSalas(toArray(s.data));
+        setReservas(toArray(r.data));
+      } catch (e) {
+        const detail = e?.response?.data?.detail;
+        setErro(detail || "Erro ao carregar dados");
       }
     }
-
     carregar();
   }, []);
 
-  // ===============================
-  // FUNÇÕES AUXILIARES (SEGURAS)
-  // ===============================
   function getNomeUsuario(id) {
-    const usuario = usuarios.find(u => u.id === id);
-    return usuario?.nome || "Usuário não encontrado";
+    const usuario = usuarios.find((u) => Number(u.id) === Number(id));
+    return usuario ? usuario.nome : "Usuário não encontrado";
   }
 
   function getNomeSala(id) {
-    const sala = salas.find(s => s.id === id);
-    return sala?.nome || "Sala não encontrada";
+    const sala = salas.find((s) => Number(s.id) === Number(id));
+    return sala ? sala.nome : "Sala não encontrada";
   }
 
   function formatarPeriodo(dataISO, duracaoStr) {
     if (!dataISO || !duracaoStr) return "-";
 
     const inicio = new Date(dataISO);
-    if (isNaN(inicio)) return "-";
-
-    const horas = parseInt(duracaoStr.replace("h", ""), 10);
-    if (isNaN(horas)) return "-";
+    const horas = parseInt(String(duracaoStr).replace("h", ""), 10) || 0;
 
     const fim = new Date(inicio);
     fim.setHours(inicio.getHours() + horas);
 
     const data = inicio.toLocaleDateString("pt-BR");
-    const horaInicio = inicio.toLocaleTimeString("pt-BR", {
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-    const horaFim = fim.toLocaleTimeString("pt-BR", {
-      hour: "2-digit",
-      minute: "2-digit"
-    });
+    const horaInicio = inicio.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    const horaFim = fim.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 
     return `${data} | ${horaInicio} → ${horaFim}`;
   }
 
-  // ===============================
-  // CRIAR RESERVA
-  // ===============================
+  async function recarregarReservas() {
+    const r = await api.get("/reservas/");
+    setReservas(toArray(r.data));
+  }
+
   async function criarReserva(e) {
     e.preventDefault();
     setMensagem("");
     setErro("");
-
-    if (!usuarioId || !salaId || !dataReserva) {
-      setErro("Preencha todos os campos");
-      return;
-    }
 
     try {
       await api.post("/reservas/", {
@@ -105,7 +82,7 @@ export default function Reservas() {
         sala_id: Number(salaId),
         data_reserva: dataReserva,
         status: `${duracao}h`,
-        observacao: ""
+        observacao: "",
       });
 
       setMensagem("Reserva criada com sucesso");
@@ -115,30 +92,27 @@ export default function Reservas() {
       setDataReserva("");
       setDuracao(2);
 
-      const r = await api.get("/reservas/");
-      setReservas(Array.isArray(r.data) ? r.data : []);
+      await recarregarReservas();
     } catch (e) {
-      setErro(e.response?.data?.detail || "Erro ao criar reserva");
+      setErro(e?.response?.data?.detail || "Erro ao criar reserva");
     }
   }
 
-  // ===============================
-  // EXCLUIR RESERVA
-  // ===============================
   async function excluirReserva(id) {
+    setMensagem("");
+    setErro("");
+
     if (!window.confirm("Excluir reserva?")) return;
 
     try {
       await api.delete(`/reservas/${id}`);
-      setReservas(prev => prev.filter(r => r.id !== id));
-    } catch {
-      setErro("Erro ao excluir reserva");
+      setReservas((prev) => prev.filter((r) => Number(r.id) !== Number(id)));
+      setMensagem("Reserva excluída com sucesso");
+    } catch (e) {
+      setErro(e?.response?.data?.detail || "Erro ao excluir reserva");
     }
   }
 
-  // ===============================
-  // RENDER
-  // ===============================
   return (
     <div className="app-container">
       <Navbar />
@@ -147,40 +121,42 @@ export default function Reservas() {
         <div className="page-container">
           <h1 className="page-title">Reservas</h1>
 
-          {loading && <div className="alert">Carregando dados...</div>}
           {mensagem && <div className="alert success">{mensagem}</div>}
           {erro && <div className="alert error">{erro}</div>}
 
           <div className="reservas-layout">
-
-            {/* FORMULÁRIO */}
             <div className="reservas-form">
               <form onSubmit={criarReserva} className="card">
-
-                <select value={usuarioId} onChange={e => setUsuarioId(e.target.value)} required>
+                <select value={usuarioId} onChange={(e) => setUsuarioId(e.target.value)} required>
                   <option value="">Selecione o Usuário</option>
-                  {Array.isArray(usuarios) && usuarios.map(u => (
-                    <option key={u.id} value={u.id}>{u.nome}</option>
+                  {usuarios.map((u) => (
+                    <option key={u.id} value={u.id}>
+                      {u.nome}
+                    </option>
                   ))}
                 </select>
 
-                <select value={salaId} onChange={e => setSalaId(e.target.value)} required>
+                <select value={salaId} onChange={(e) => setSalaId(e.target.value)} required>
                   <option value="">Selecione a Sala</option>
-                  {Array.isArray(salas) && salas.map(s => (
-                    <option key={s.id} value={s.id}>{s.nome}</option>
+                  {salas.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.nome}
+                    </option>
                   ))}
                 </select>
 
                 <input
                   type="datetime-local"
                   value={dataReserva}
-                  onChange={e => setDataReserva(e.target.value)}
+                  onChange={(e) => setDataReserva(e.target.value)}
                   required
                 />
 
-                <select value={duracao} onChange={e => setDuracao(Number(e.target.value))}>
-                  {[2, 3, 4, 5, 6, 8, 10, 12].map(h => (
-                    <option key={h} value={h}>{h} horas</option>
+                <select value={duracao} onChange={(e) => setDuracao(Number(e.target.value))} required>
+                  {[2, 3, 4, 5, 6, 8, 10, 12].map((h) => (
+                    <option key={h} value={h}>
+                      {h} horas
+                    </option>
                   ))}
                 </select>
 
@@ -188,7 +164,6 @@ export default function Reservas() {
               </form>
             </div>
 
-            {/* TABELA */}
             <div className="reservas-tabela">
               <table>
                 <thead>
@@ -201,8 +176,14 @@ export default function Reservas() {
                   </tr>
                 </thead>
                 <tbody>
-                  {Array.isArray(reservas) && reservas.length > 0 ? (
-                    reservas.map(r => (
+                  {reservas.length === 0 ? (
+                    <tr>
+                      <td colSpan="5" style={{ textAlign: "center", opacity: 0.8 }}>
+                        Nenhuma reserva cadastrada
+                      </td>
+                    </tr>
+                  ) : (
+                    reservas.map((r) => (
                       <tr key={r.id}>
                         <td>{getNomeUsuario(r.usuario_id)}</td>
                         <td>{getNomeSala(r.sala_id)}</td>
@@ -215,24 +196,15 @@ export default function Reservas() {
                         </td>
                       </tr>
                     ))
-                  ) : (
-                    <tr>
-                      <td colSpan="5">Nenhuma reserva encontrada</td>
-                    </tr>
                   )}
                 </tbody>
               </table>
             </div>
 
-            {/* AGENDA */}
             <div className="reservas-agenda">
               <h2>Agenda do Dia</h2>
-              <AgendaDia
-                salas={Array.isArray(salas) ? salas : []}
-                reservas={Array.isArray(reservas) ? reservas : []}
-              />
+              <AgendaDia salas={salas} reservas={reservas} />
             </div>
-
           </div>
         </div>
       </main>

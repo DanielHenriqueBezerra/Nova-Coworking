@@ -1,10 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://nova-coworking.onrender.com",
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: import.meta.env.VITE_API_URL,
+  timeout: 30000,
 });
 
 export default api;
