@@ -7,24 +7,24 @@
 
 ## 📑 Sumário
 
-- 📌 Visão Geral  
-- 🧱 Arquitetura do Projeto  
-- 🔧 Tecnologias Utilizadas  
-- 🎯 Objetivo do Sistema  
-- 🔐 Regras de Negócio  
-- 🗄️ Backend  
-  - 🧩 Entidades do Sistema  
-  - ⏰ Regras de Reserva  
-  - 🔌 Endpoints da API  
-  - 📑 Swagger  
-  - 🌐 CORS  
-  - ▶️ Como Rodar o Backend Localmente  
-- 🎨 Frontend  
-  - ▶️ Como Rodar o Frontend Localmente  
-- 🌍 Ambientes (Local x Produção)  
-- ⚙️ Deploy em Produção  
-- ⚠️ Limitações Atuais  
-- 🚀 Evoluções Planejadas  
+- [📌 Visão Geral](#-visão-geral)
+- [🧱 Arquitetura do Projeto](#-arquitetura-do-projeto)
+- [🔧 Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [🎯 Objetivo do Sistema](#-objetivo-do-sistema)
+- [🔐 Regras de Negócio](#-regras-de-negócio-decisão-arquitetural)
+- [🗄️ Backend](#-backend)
+  - [🧩 Entidades do Sistema](#-entidades-do-sistema)
+  - [⏰ Regras de Reserva](#-regras-de-reserva-backend)
+  - [🔌 Endpoints da API](#-endpoints-da-api)
+  - [📑 Swagger](#-swagger-documentação-da-api)
+  - [🌐 CORS](#-cors)
+  - [▶️ Como Rodar o Backend Localmente](#-como-rodar-o-backend-localmente)
+- [🎨 Frontend](#-frontend)
+  - [▶️ Como Rodar o Frontend Localmente](#-como-rodar-o-frontend-localmente-vite)
+- [🌍 Ambientes (Local x Produção)](#-ambientes-local-x-produção)
+- [⚙️ Deploy em Produção](#-deploy-em-produção)
+- [⚠️ Limitações Atuais](#-limitações-atuais)
+- [🚀 Evoluções Planejadas](#-evoluções-planejadas)
 
 ---
 
