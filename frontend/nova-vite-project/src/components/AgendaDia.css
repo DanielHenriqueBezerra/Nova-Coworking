@@ -34,4 +34,16 @@
   padding: 6px;
   border-radius: 8px;
   font-size: 12px;
+  position: absolute; /* Necessário para o correto posicionamento */
+  width: 100%; /* Garante que o bloco ocupe toda a largura da célula da sala */
+}
+
+.sala-col {
+  position: relative; /* ESSENCIAL */
+}
+
+/* Ajuste no cálculo do posicionamento da reserva */
+.reserva-bloco {
+  top: calc(var(--hora-inicio) * 60px); /* Aqui, "hora-inicio" é o cálculo baseado no horário da reserva */
+  height: calc(var(--duracao) * 60px); /* Aqui, "duracao" é a duração da reserva em horas */
 }
